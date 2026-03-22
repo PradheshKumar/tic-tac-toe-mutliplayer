@@ -522,14 +522,16 @@ function InitModule(ctx, logger, nk, initializer) {
   }
 
   // ── Register the authoritative match handler ────────────────────────────────
+  // Note: Nakama's Goja JS runtime (v3.22.0) does not support ES6 shorthand
+  // property syntax. All keys must be written in full `key: value` form.
   initializer.registerMatch("match_handler", {
-    matchInit,
-    matchJoinAttempt,
-    matchJoin,
-    matchLoop,
-    matchLeave,
-    matchTerminate,
-    matchSignal,
+    matchInit:        matchInit,
+    matchJoinAttempt: matchJoinAttempt,
+    matchJoin:        matchJoin,
+    matchLoop:        matchLoop,
+    matchLeave:       matchLeave,
+    matchTerminate:   matchTerminate,
+    matchSignal:      matchSignal,
   });
 
   // ── Register RPCs callable by authenticated clients ─────────────────────────
