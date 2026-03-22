@@ -222,26 +222,27 @@ Use the console to inspect matches, leaderboards, and storage objects.
 
 [Vercel](https://vercel.com) is free for personal projects with no limits on bandwidth.
 
-1. **Update the Nakama server URL** in [frontend/src/services/nakamaClient.js](frontend/src/services/nakamaClient.js):
-   ```js
-   // Replace with your Railway/Fly.io public URL (no trailing slash)
-   const client = new Client("defaultkey", "<your-railway-url>", "443", true);
-   // Railway and Fly.io serve over HTTPS (port 443, useSSL = true)
-   ```
+1. **Create a Vercel account** at vercel.com → **New Project → Import Git Repository**.
 
-2. **Push the change to GitHub.**
-
-3. **Create a Vercel account** at vercel.com → **New Project → Import Git Repository**.
-
-4. **Configure the project:**
+2. **Configure the project:**
    - Framework preset: `Vite`
    - Root directory: `frontend`
    - Build command: `npm run build`
    - Output directory: `dist`
 
-5. **Deploy.** Vercel gives you a public URL like `tic-tac-toe-xxx.vercel.app`.
+3. **Set environment variables** in the Vercel dashboard under **Project → Settings → Environment Variables**:
+   ```
+   VITE_NAKAMA_KEY   = defaultkey
+   VITE_NAKAMA_HOST  = <your-railway-or-flyio-url>
+   VITE_NAKAMA_PORT  = 443
+   VITE_NAKAMA_SSL   = true
+   ```
+   > These are baked into the JS bundle at Vite build time. Any change to these values requires a redeploy.
+
+4. **Deploy.** Vercel gives you a public URL like `tic-tac-toe-xxx.vercel.app`.
 
 > **Alternative free option: [Netlify](https://netlify.com)**
+> Set the same four `VITE_*` variables under **Site → Environment variables**, then:
 > ```bash
 > cd frontend && npm run build
 > # Drag-and-drop the dist/ folder at app.netlify.com/drop
