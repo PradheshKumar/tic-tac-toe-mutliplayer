@@ -193,30 +193,26 @@ Use the console to inspect matches, leaderboards, and storage objects.
 
 ### Backend — Railway (free tier)
 
-[Railway](https://railway.app) supports Docker Compose natively and has a free starter plan ($5 credit/month, no credit card required).
+[Railway](https://railway.app) has a free starter plan ($5 credit/month, no credit card required). Deploy Nakama and PostgreSQL as **two separate Railway services** — Railway provides a managed Postgres that Nakama connects to via an environment variable.
 
-1. **Push your code to GitHub** (if not already).
+1. **Push your code to GitHub.**
 
-2. **Create a Railway account** at railway.app and click **New Project → Deploy from GitHub repo**.
+2. **Create a Railway account** at railway.app → **New Project**.
 
-3. **Select this repository.** Railway detects `docker-compose.yml` automatically.
+3. **Add a PostgreSQL database**: Inside the project click **+ New → Database → PostgreSQL**. Railway provisions it and exposes a `DATABASE_URL` environment variable automatically.
 
-4. **Set environment variables** in the Railway dashboard under your service settings:
+4. **Add the Nakama service**: Click **+ New → GitHub Repo**, select this repository.
+   - Railway will detect the `Dockerfile` at the project root and build it.
+   - Under **Settings → Networking**, generate a public domain (Railway gives you `xxx.up.railway.app`).
+
+5. **Link the database**: In the Nakama service → **Variables**, click **+ Reference** and add:
    ```
-   POSTGRES_PASSWORD=<strong-random-password>
+   DATABASE_URL  →  (reference the Postgres service's DATABASE_URL)
    ```
-
-5. **Expose the Nakama port.** In the Railway service settings, set the public port to `7350`. Railway gives you a public URL like `nakama-production-xxxx.up.railway.app`.
 
 6. **Verify** by opening `https://<your-railway-url>/healthcheck` — should return `{}`
 
-> **Alternative free option: [Fly.io](https://fly.io)**
-> Fly.io has a permanent free tier (3 shared VMs + managed Postgres).
-> ```bash
-> # Install flyctl, then from the project root:
-> fly launch          # detects docker-compose, creates fly.toml
-> fly deploy
-> ```
+> **Note:** The `Dockerfile` at the project root is specifically for Railway. Local development still uses `docker-compose.yml` (which includes its own Postgres).
 
 ### Frontend — Vercel (free tier)
 
