@@ -13,7 +13,15 @@
  */
 import { Client } from "@heroiclabs/nakama-js";
 
-// Single shared Nakama client instance used across the entire app
-const client = new Client("defaultkey", "127.0.0.1", "7350", false);
+// Single shared Nakama client instance used across the entire app.
+// All values come from environment variables (prefixed with VITE_ for Vite's
+// build-time injection). Copy frontend/.env.sample → frontend/.env and fill in
+// your values before running locally or deploying.
+const client = new Client(
+  import.meta.env.VITE_NAKAMA_KEY  ?? "defaultkey",
+  import.meta.env.VITE_NAKAMA_HOST ?? "127.0.0.1",
+  import.meta.env.VITE_NAKAMA_PORT ?? "7350",
+  import.meta.env.VITE_NAKAMA_SSL  === "true",
+);
 
 export default client;
