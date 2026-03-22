@@ -1,0 +1,64 @@
+/* ─── CSS variables ──────────────────────────────────────────────────────── */
+:root {
+  --bg:        #0d0d14;
+  --surface:   #16162a;
+  --surface-2: #1e1e38;
+  --border:    #2e2e52;
+
+  --x-color:   #f97316;   /* orange for X */
+  --o-color:   #38bdf8;   /* sky blue for O */
+
+  --text:      #e2e8f0;
+  --text-muted: #64748b;
+
+  --accent:    #7c3aed;
+  --accent-hover: #6d28d9;
+
+  --success:   #22c55e;
+  --error:     #f43f5e;
+  --warning:   #eab308;
+
+  --radius:    12px;
+  --radius-sm: 6px;
+
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.875em;
+}
+
+/* ─── Shared spinner ─────────────────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}

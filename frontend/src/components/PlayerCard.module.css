@@ -1,0 +1,104 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  min-width: 140px;
+  max-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.card.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.25), var(--shadow);
+}
+
+.card.me.active {
+  border-color: var(--success);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2), var(--shadow);
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.avatar.x { background: linear-gradient(135deg, var(--x-color), #dc2626); }
+.avatar.o { background: linear-gradient(135deg, var(--o-color), #0ea5e9); }
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.mark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.markX { color: var(--x-color); }
+.markO { color: var(--o-color); }
+
+.markLabel {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.turnIndicator {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.card.me .turnIndicator {
+  background: var(--success);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Responsive: show cards side-by-side on mobile */
+@media (max-width: 700px) {
+  .card {
+    flex-direction: row;
+    max-width: 100%;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .turnIndicator {
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+  }
+}

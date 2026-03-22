@@ -1,0 +1,67 @@
+.cell {
+  width: 100px;
+  height: 100px;
+  background: var(--surface-2);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cell.empty:hover {
+  background: #252545;
+  border-color: var(--accent);
+  transform: scale(1.03);
+}
+
+.cell:disabled {
+  cursor: not-allowed;
+}
+
+.cell.empty:disabled {
+  cursor: not-allowed;
+}
+
+/* X cell */
+.cell.x {
+  border-color: var(--x-color);
+  background: rgba(249, 115, 22, 0.08);
+  cursor: default;
+}
+
+/* O cell */
+.cell.o {
+  border-color: var(--o-color);
+  background: rgba(56, 189, 248, 0.08);
+  cursor: default;
+}
+
+.mark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  animation: pop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cell.x .mark { color: var(--x-color); }
+.cell.o .mark { color: var(--o-color); }
+
+@keyframes pop {
+  from { transform: scale(0.3); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .cell {
+    width: 80px;
+    height: 80px;
+  }
+  .mark { font-size: 2rem; }
+}
