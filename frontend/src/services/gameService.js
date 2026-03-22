@@ -10,7 +10,7 @@
  * from the chosen username. This keeps onboarding frictionless (no password)
  * while still tying the session to a unique, persistent Nakama user account.
  */
-import client from "./nakamaClient";
+import client, { useSSL } from "./nakamaClient";
 
 /**
  * Authenticate with Nakama using a device ID derived from the username.
@@ -26,7 +26,7 @@ export async function authenticate(username) {
  * Create and connect a WebSocket to Nakama.
  */
 export async function connectSocket(session) {
-  const socket = client.createSocket(false, false);
+  const socket = client.createSocket(useSSL, false);
   await socket.connect(session, true);
   return socket;
 }

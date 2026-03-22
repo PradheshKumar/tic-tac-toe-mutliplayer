@@ -17,11 +17,15 @@ import { Client } from "@heroiclabs/nakama-js";
 // All values come from environment variables (prefixed with VITE_ for Vite's
 // build-time injection). Copy frontend/.env.sample → frontend/.env and fill in
 // your values before running locally or deploying.
+// Export the SSL flag separately so gameService can pass it to createSocket().
+// createSocket(useSSL) controls ws:// vs wss:// — it must match the HTTP SSL setting.
+export const useSSL = import.meta.env.VITE_NAKAMA_SSL === "true";
+
 const client = new Client(
   import.meta.env.VITE_NAKAMA_KEY  ?? "defaultkey",
   import.meta.env.VITE_NAKAMA_HOST ?? "127.0.0.1",
   import.meta.env.VITE_NAKAMA_PORT ?? "7350",
-  import.meta.env.VITE_NAKAMA_SSL  === "true",
+  useSSL,
 );
 
 export default client;
